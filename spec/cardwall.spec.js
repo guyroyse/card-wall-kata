@@ -3,6 +3,9 @@ var inbetween = function(a, b, c) {
 };
 
 describe("Cardwall", function() {
+    afterEach(function() {
+	delete localStorage.cards;
+    });
   describe ("person", function(){
     var person;
     it("has a name", function(){
@@ -194,6 +197,18 @@ describe("Cardwall", function() {
       var after = Date.now();
       expect(inbetween(cardOne.startDate.getTime(), before, after)).toBe(true);
     });
+
+      it("can remove cards", function() {
+	  var cardOne = createCard("w00t", "desc1", 1);
+	  wall.addCard(cardOne);
+	  wall.removeCard(cardOne);
+	  expect(wall.allCards()).toEqual([]);
+      });
+
+      it("can add statuses", function() {
+	  wall.addStatus("TODO");
+	  expect(wall.cards[0].name).toBe("TODO");
+      });
 
   });
 

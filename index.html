@@ -1,0 +1,42 @@
+<html>
+	<head><title>Cardwall</title>
+	<style type="text/css">
+	.bordered {
+border: 1px solid #898989;
+border-radius: 5px;
+padding: 10px;
+margin: 10px;
+}
+	</style>
+	</head>
+	<body>
+		<h3>Card wall</h3>
+		<div class="outer">
+		</div>
+		<div class="bordered">
+			<input name="description" />
+			<button class="add">Add a card</button>
+		</div>
+		<div class="bordered">
+			<input name="name" />
+			<button class="addStatus">Add status</button>
+		</div>
+		<script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="lib/underscore-min.js"></script>
+		<script type="text/javascript" src="src/cardwall.js"></script>
+		<script type="text/javascript" src="src/view.js">
+		</script>
+		<script type="text/html" id="cardTemplate">
+		<div class="bordered">card has description <%=
+	card.description %>
+		  <button class="remove">Remove</button>
+		  <select name="destination">
+		    <% _(statuses).each(function(status) { %>
+		    <option><%= status %></option>
+		      <% }); %>
+		  </select>
+		  <button class="move">Move</button>
+		</div>
+		</script>
+	</body>
+</html>
