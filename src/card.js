@@ -25,7 +25,8 @@ var createCard = function(name, description, priority) {
       startDate: null,
       endDate: null,
       block: function() { this.blocked = true; },
-      unblock: function() { this.blocked = false; }
+      unblock: function() { this.blocked = false; },
+      complete: function() { this.done = true; }
     };
 
     return card;

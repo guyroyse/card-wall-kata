@@ -45,17 +45,12 @@ describe("Wall", function() {
     expect(wall.allCards()).toEqual([cardThree, cardTwo, cardOne]);
   });
 
-  it("sets a card to done", function() {
-    wall.addCard(cardOne);
-    wall.completeCard(cardOne);
-    expect(cardOne.done).toBe(true);
-  });
-
   it("can filter on completeness", function() {
     wall.addCard(cardOne);
     wall.addCard(cardThree);
     wall.addCard(cardTwo);
-    wall.completeCard(cardTwo);
+
+    cardTwo.complete();
 
     expect(wall.completedCards()).toEqual([cardTwo]);
   });
@@ -65,8 +60,8 @@ describe("Wall", function() {
     wall.addCard(cardThree);
     wall.addCard(cardTwo);
 
-    wall.completeCard(cardTwo);
-    wall.completeCard(cardThree);
+    cardTwo.complete();
+    cardThree.complete();
 
     expect(wall.completedCards()).toEqual([cardThree, cardTwo]);
   });

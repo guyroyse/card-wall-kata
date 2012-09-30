@@ -30,10 +30,6 @@ var createWall = function() {
       localStorage.cards = JSON.stringify(this.cards);
     },
 
-    completeCard: function(card){
-      card.done = true;  
-    },
-
     completedCards: function() {
       return _(this.allCards()).filter(function(card) {
         return card.done;

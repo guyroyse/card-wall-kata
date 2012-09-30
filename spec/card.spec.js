@@ -21,6 +21,11 @@ describe("Card", function() {
     expect(card.done).toBe(false)
   });
 
+  it("can be completed", function() {
+    card.complete();
+    expect(card.done).toBe(true);
+  });
+
   it("has no assignee", function(){
     expect(card.assignees).toEqual([])
   });
