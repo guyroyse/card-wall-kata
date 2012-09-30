@@ -1,3 +1,7 @@
+var when = function(description, fn) {
+  describe("when " + description, fn);
+};
+
 beforeEach(function() {
   this.addMatchers({
     toBeBetween: function(start, end) {

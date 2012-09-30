@@ -5,7 +5,7 @@ describe("Card", function() {
     card = createCard("name", "desc", 1);
   });
 
-  describe("when created", function() {
+  when("created", function() {
 
     it("has a name", function(){
       expect(card.name).toBe("name");
@@ -45,7 +45,7 @@ describe("Card", function() {
 
   });
 
-  describe("when started", function() {
+  when("started", function() {
 
     it("has a start date when started", function() {
       var before = Date.now();
@@ -57,7 +57,7 @@ describe("Card", function() {
 
   });
 
-  describe("when completed", function() {
+  when("completed", function() {
 
     it("is marked as done", function() {
       card.complete();
@@ -74,7 +74,7 @@ describe("Card", function() {
 
   });
 
-  describe("when adding assignees", function() {
+  when("adding assignees", function() {
 
     it("accepts assignees", function() {
       card.addPerson("name");
@@ -82,28 +82,27 @@ describe("Card", function() {
     });
 
     it("accepts multiple assignees", function(){
-        card.addPerson("name");
-        card.addPerson("name2");
-        expect(card.assignees.length).toBe(2);
+      card.addPerson("name");
+      card.addPerson("name2");
+      expect(card.assignees.length).toBe(2);
     });
 
     it("accepts only unique assignees", function(){
-
-        card.addPerson("name");
-        card.addPerson("name2");
-        card.addPerson("name2");
-        expect(card.assignees.length).toBe(2);
+      card.addPerson("name");
+      card.addPerson("name2");
+      card.addPerson("name2");
+      expect(card.assignees.length).toBe(2);
     });
 
   });
 
-  describe("when blocked", function() {
+  when("blocked", function() {
 
     beforeEach(function() {
       card.block();
     });
 
-    it("is is blocked",function(){
+    it("is blocked",function(){
       expect(card).toBeBlocked();
     });
 

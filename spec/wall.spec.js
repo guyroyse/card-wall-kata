@@ -13,22 +13,36 @@ describe("Wall", function() {
     delete localStorage.cards;
   });
 
-  it("has no cards when created", function(){
-    expect(wall.allCards()).toEqual([]);
+  when("created", function() {
+
+    it("has no cards", function(){
+      expect(wall.allCards()).toEqual([]);
+    });
+
   });
 
-  it("accepts cards", function() {
-    wall.addCard(cardOne);
-    expect(wall.allCards()[0]).toBe(cardOne);
+  when("adding cards", function() {
+
+    it("accepts cards", function() {
+      wall.addCard(cardOne);
+      expect(wall.allCards().length).toBe(1);
+    });
+
+    it("accepts multiple cards", function() {
+      wall.addCard(cardOne);
+      wall.addCard(cardTwo);
+      expect(wall.allCards().length).toBe(2);
+    });
+
+    it("removes cards", function() {
+      wall.addCard(cardOne);
+      wall.removeCard(cardOne);
+      expect(wall.allCards().length).toBe(0);
+    });
+
   });
 
-  it("removes cards", function() {
-    wall.addCard(cardOne);
-    wall.removeCard(cardOne);
-    expect(wall.allCards()).toEqual([]);
-  });
-
-  describe("when wall is full of cards", function() {
+  when("full of cards", function() {
 
     beforeEach(function() {
       wall.addCard(cardOne);
