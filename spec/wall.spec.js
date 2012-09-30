@@ -74,7 +74,7 @@ describe("Wall", function() {
 
   it("can add statuses", function() {
     wall.addStatus("TODO");
-    expect(wall.cards[0].name).toBe("TODO");
+    expect(wall.statuses()[0]).toBe("TODO");
   });
 
 });

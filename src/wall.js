@@ -7,8 +7,6 @@ var createWall = function() {
 
   var wall = {
 
-    cards: cards,
-
     addCard: function(card, statusIndex) {
       statusIndex = statusIndex || 0;
       var status = cards[statusIndex];
@@ -42,10 +40,6 @@ var createWall = function() {
       });
     },
 
-    startWork: function(card){
-      card.startDate = new Date();
-    },
-
     allCards: function(){
       var theseCards = [];
       _(cards).each(function(status) {
@@ -60,6 +54,12 @@ var createWall = function() {
         cards: []
       });
       localStorage.cards = JSON.stringify(cards);
+    },
+
+    statuses: function() {
+      return cards.map(function(card) {
+        return card.name
+      });
     }
 
   };
