@@ -19,62 +19,50 @@ describe("Wall", function() {
 
   it("has one card", function() {
     wall.addCard(cardOne);
-
     expect(wall.allCards().length).toBe(1);      
   });
 
-  it("create 2 cards", function(){
+  it("can have multiple cards", function(){
     wall.addCard(cardOne);
     wall.addCard(cardTwo);
-
     expect(wall.allCards().length).toBe(2); 
   });
 
   it("orders 2 cards based on priority", function(){
     wall.addCard(cardOne);
     wall.addCard(cardTwo);
-
     expect(wall.allCards()).toEqual([cardTwo, cardOne]);
   });
 
-  it("orders 3 cards based on priority", function(){
-    wall.addCard(cardOne);
-    wall.addCard(cardThree);
-    wall.addCard(cardTwo);
+  describe("when wall is full of cards", function() {
 
-    expect(wall.allCards()).toEqual([cardThree, cardTwo, cardOne]);
-  });
+    beforeEach(function() {
+      wall.addCard(cardOne);
+      wall.addCard(cardTwo);
+      wall.addCard(cardThree);
+    });
 
-  it("can filter on completeness", function() {
-    wall.addCard(cardOne);
-    wall.addCard(cardThree);
-    wall.addCard(cardTwo);
+    it("orders cards based on priority", function(){
+      expect(wall.allCards()).toEqual([cardThree, cardTwo, cardOne]);
+    });
 
-    cardTwo.complete();
+    it("can filter on completeness", function() {
+      cardTwo.complete();
+      expect(wall.completedCards()).toEqual([cardTwo]);
+    });
 
-    expect(wall.completedCards()).toEqual([cardTwo]);
-  });
+    it("can filter on completeness part 2", function() {
+      cardTwo.complete();
+      cardThree.complete();
+      expect(wall.completedCards()).toEqual([cardThree, cardTwo]);
+    });
 
-  it("can filter on completeness part 2", function() {
-    wall.addCard(cardOne);
-    wall.addCard(cardThree);
-    wall.addCard(cardTwo);
+    it("can filter on blockedness", function() {
+      cardTwo.block();
+      cardThree.block();
+      expect(wall.blockedCards()).toEqual([cardThree, cardTwo]);
+    });
 
-    cardTwo.complete();
-    cardThree.complete();
-
-    expect(wall.completedCards()).toEqual([cardThree, cardTwo]);
-  });
-
-  it("can filter on blockedness", function() {
-    wall.addCard(cardOne);
-    wall.addCard(cardThree);
-    wall.addCard(cardTwo);
-
-    cardTwo.block();
-    cardThree.block();
-
-    expect(wall.blockedCards()).toEqual([cardThree, cardTwo]);
   });
 
   it("has a 'start work' function", function(){
