@@ -32,7 +32,7 @@ var createWall = function() {
 
     completedCards: function() {
       return _(this.allCards()).filter(function(card) {
-        return card.done;
+        return card.done();
       });
     },
 

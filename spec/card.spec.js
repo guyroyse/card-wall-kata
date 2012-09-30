@@ -24,7 +24,7 @@ describe("Card", function() {
     });
 
     it("is not done", function(){
-      expect(card.done).toBe(false)
+      expect(card.done()).toBeFalsy();
     });
 
     it("is not blocked",function(){
@@ -59,9 +59,9 @@ describe("Card", function() {
 
   describe("when completed", function() {
 
-    it("can be completed", function() {
+    it("is marked as done", function() {
       card.complete();
-      expect(card.done).toBe(true);
+      expect(card.done()).toBeTruthy();
     });
 
     it("has an end date when completed", function() {

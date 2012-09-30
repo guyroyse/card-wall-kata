@@ -17,7 +17,7 @@ var createCard = function(name, description, priority) {
       name: name,
       description: description,
       priority: priority,
-      done: false,
+      done: function() { return this.endDate !== null; },
       blocked: false,
       assignees: [],
       addPerson: addPerson,
@@ -26,8 +26,8 @@ var createCard = function(name, description, priority) {
       endDate: null,
       block: function() { this.blocked = true; },
       unblock: function() { this.blocked = false; },
-      complete: function() { this.done = true; this.endDate = new Date(); },
-      start: function() { card.startDate = new Date(); }
+      complete: function() { this.endDate = new Date(); },
+      start: function() { this.startDate = new Date(); }
     };
 
     return card;
