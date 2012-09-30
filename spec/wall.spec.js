@@ -17,21 +17,15 @@ describe("Wall", function() {
     expect(wall.allCards()).toEqual([]);
   });
 
-  it("has one card", function() {
+  it("accepts cards", function() {
     wall.addCard(cardOne);
-    expect(wall.allCards().length).toBe(1);      
+    expect(wall.allCards()[0]).toBe(cardOne);
   });
 
-  it("can have multiple cards", function(){
+  it("removes cards", function() {
     wall.addCard(cardOne);
-    wall.addCard(cardTwo);
-    expect(wall.allCards().length).toBe(2); 
-  });
-
-  it("orders 2 cards based on priority", function(){
-    wall.addCard(cardOne);
-    wall.addCard(cardTwo);
-    expect(wall.allCards()).toEqual([cardTwo, cardOne]);
+    wall.removeCard(cardOne);
+    expect(wall.allCards()).toEqual([]);
   });
 
   describe("when wall is full of cards", function() {
@@ -42,22 +36,21 @@ describe("Wall", function() {
       wall.addCard(cardThree);
     });
 
+    it("is full of cards", function(){
+      expect(wall.allCards().length).toBe(3); 
+    });
+
     it("orders cards based on priority", function(){
       expect(wall.allCards()).toEqual([cardThree, cardTwo, cardOne]);
     });
 
-    it("can filter on completeness", function() {
-      cardTwo.complete();
-      expect(wall.completedCards()).toEqual([cardTwo]);
-    });
-
-    it("can filter on completeness part 2", function() {
+    it("filters cards on completeness", function() {
       cardTwo.complete();
       cardThree.complete();
       expect(wall.completedCards()).toEqual([cardThree, cardTwo]);
     });
 
-    it("can filter on blockedness", function() {
+    it("filters cards on blockedness", function() {
       cardTwo.block();
       cardThree.block();
       expect(wall.blockedCards()).toEqual([cardThree, cardTwo]);
@@ -65,25 +58,8 @@ describe("Wall", function() {
 
   });
 
-  it("has a 'start work' function", function(){
-    var before = Date.now();
-    wall.addCard(cardOne);
-    wall.startWork(cardOne);
-    var after = Date.now();
-
-    expect(cardOne.startDate.getTime()).toBeBetween(before, after);
-  });
-
-  it("can remove cards", function() {
-    wall.addCard(cardOne);
-    wall.removeCard(cardOne);
-
-    expect(wall.allCards()).toEqual([]);
-  });
-
   it("can add statuses", function() {
     wall.addStatus("TODO");
-
     expect(wall.cards[0].name).toBe("TODO");
   });
 

@@ -1,33 +1,33 @@
 var createWall = function() {
 
-  var initialCards = [];
+  var cards = [];
   if (localStorage.cards) {
-    initialCards = JSON.parse(localStorage.cards);
+    cards = JSON.parse(localStorage.cards);
   }
 
   var wall = {
 
-    cards: initialCards,
+    cards: cards,
 
     addCard: function(card, statusIndex) {
       statusIndex = statusIndex || 0;
-      var status = this.cards[statusIndex];
+      var status = cards[statusIndex];
       if (!status) {
-        status = this.cards[statusIndex] = {cards: []};
+        status = cards[statusIndex] = {cards: []};
       }
       var cardsForStatus = status.cards;
       cardsForStatus.push(card);
       cardsForStatus.sort(function(a,b) {
         return b.priority - a.priority;
       });
-      localStorage.cards = JSON.stringify(this.cards);
+      localStorage.cards = JSON.stringify(cards);
     },
 
     removeCard: function(card) {
-      _(this.cards).each(function(status) {
+      _(cards).each(function(status) {
         status.cards = _(status.cards).without(card);
       });
-      localStorage.cards = JSON.stringify(this.cards);
+      localStorage.cards = JSON.stringify(cards);
     },
 
     completedCards: function() {
@@ -47,19 +47,19 @@ var createWall = function() {
     },
 
     allCards: function(){
-      var cards = [];
-      _(this.cards).each(function(status) {
-        cards = cards.concat(status.cards);
+      var theseCards = [];
+      _(cards).each(function(status) {
+        theseCards = theseCards.concat(status.cards);
       });
-      return cards;
+      return theseCards;
     },
 
     addStatus: function(name) {
-      this.cards.push({
+      cards.push({
         name: name,
         cards: []
       });
-      localStorage.cards = JSON.stringify(this.cards);
+      localStorage.cards = JSON.stringify(cards);
     }
 
   };

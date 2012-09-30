@@ -21,9 +21,33 @@ describe("Card", function() {
     expect(card.done).toBe(false)
   });
 
+  it("has a start date that is null",function(){
+    expect(card.startDate).toBe(null);
+  });
+  
+  it("has a start date when started", function() {
+    var before = Date.now();
+    card.start();
+    var after = Date.now();
+
+    expect(card.startDate.getTime()).toBeBetween(before, after);
+  });
+
+  it("has an end date that is null",function(){
+    expect(card.endDate).toBe(null);
+  });
+
   it("can be completed", function() {
     card.complete();
     expect(card.done).toBe(true);
+  });
+
+  it("has an end date when completed", function() {
+    var before = Date.now();
+    card.complete();
+    var after = Date.now();
+
+    expect(card.endDate.getTime()).toBeBetween(before, after);
   });
 
   it("has no assignee", function(){
@@ -42,14 +66,6 @@ describe("Card", function() {
   it("can be unblocked",function(){
     card.unblock();
     expect(card).not.toBeBlocked();
-  });
-
-  it("has a start date that is null",function(){
-    expect(card.startDate).toBe(null);
-  });
-  
-  it("has an end date that is null",function(){
-    expect(card.endDate).toBe(null);
   });
 
   it("has one assignee", function() {
