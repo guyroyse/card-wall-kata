@@ -17,7 +17,7 @@ jQuery(function($) {
       outer.empty();
       _(wall.cards).each(function(status) {
         var between = $('<div class="bordered"/>').appendTo(outer);
-          between.text("status: " + (status.name || "I HAVE NO NAME") + " sum " + sumCardsByStatus(status));
+          between.text("status: " + (status.name || "I HAVE NO NAME") + ", total complexity is " + sumCardsByStatus(status));
         _(status.cards).each(function(card) {
           var template = _.template($('#cardTemplate').html());
           var statuses = _(_(wall.cards).without(status)).pluck('name');
