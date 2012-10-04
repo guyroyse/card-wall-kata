@@ -92,4 +92,12 @@ describe("Wall", function() {
 	wall.moveCard(cardOne, wall.cards[1]);
 	expect(wall.cards[0].cards).toEqual([]);
     });
+
+    it('can move cards by name', function() {
+	wall.addStatus("TODO");
+	wall.addStatus("DOING");
+	wall.addCard(cardOne);
+	wall.moveCard(cardOne, "DOING");
+	expect(wall.cards[1].cards).toEqual([cardOne]);
+    });
 });

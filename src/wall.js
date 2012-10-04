@@ -63,6 +63,12 @@ var createWall = function() {
     },
 
       moveCard: function(card, dest) {
+	  if (_.isString(dest)) {
+	      var name = dest;
+	      dest = _(cards).find(function(status) {
+		  return status.name == name;
+	      });
+	  }
 	  _(_(cards).without(dest)).each(function(origStatus) {
 	      origStatus.cards = _(origStatus.cards).without(card);
 	  });
