@@ -100,4 +100,12 @@ describe("Wall", function() {
 	wall.moveCard(cardOne, "DOING");
 	expect(wall.cards[1].cards).toEqual([cardOne]);
     });
+
+    it("doesn't copy cards when trying to same status", function() {
+	wall.addStatus("TODO");
+	wall.addStatus("DOING");
+	wall.addCard(cardOne);
+	wall.moveCard(cardOne, "TODO");
+	expect(wall.cards[0].cards).toEqual([cardOne]);
+    });
 });

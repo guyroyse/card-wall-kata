@@ -69,7 +69,7 @@ var createWall = function() {
 		  return status.name == name;
 	      });
 	  }
-	  _(_(cards).without(dest)).each(function(origStatus) {
+	  _(cards).each(function(origStatus) {
 	      origStatus.cards = _(origStatus.cards).without(card);
 	  });
 	  // remove from old ones
