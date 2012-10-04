@@ -77,4 +77,19 @@ describe("Wall", function() {
     expect(wall.statuses()[0]).toBe("TODO");
   });
 
+    it('can move cards', function() {
+	wall.addStatus("TODO");
+	wall.addStatus("DOING");
+	wall.addCard(cardOne);
+	wall.moveCard(cardOne, wall.cards[1]);
+	expect(wall.cards[1].cards).toEqual([cardOne]);
+    });
+
+    it("doesn't copy cards when moving", function() {
+	wall.addStatus("TODO");
+	wall.addStatus("DOING");
+	wall.addCard(cardOne);
+	wall.moveCard(cardOne, wall.cards[1]);
+	expect(wall.cards[0].cards).toEqual([]);
+    });
 });

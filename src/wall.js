@@ -60,7 +60,16 @@ var createWall = function() {
       return cards.map(function(card) {
         return card.name
       });
-    }
+    },
+
+      moveCard: function(card, dest) {
+	  _(_(cards).without(dest)).each(function(origStatus) {
+	      origStatus.cards = _(origStatus.cards).without(card);
+	  });
+	  // remove from old ones
+	  dest.cards.push(card);
+	  localStorage.cards = JSON.stringify(cards);
+      }
 
   };
 

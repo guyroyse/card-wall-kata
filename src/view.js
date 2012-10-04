@@ -17,6 +17,7 @@ jQuery(function($) {
           var statuses = _(_(wall.cards).without(status)).pluck('name');
           var html = template({card: card, statuses:statuses});
           var inner = $(html);
+	    inner.data('card', card);
           $(inner).find('button.remove').click(function() {
             wall.removeCard(card);
             refresh();
@@ -28,6 +29,15 @@ jQuery(function($) {
           });
           between.append(inner);
         });
+	  outer.find('.draggable').draggable();
+	  between.droppable({
+	      drop: function(ev, ui) {
+		  // ps, here be dragons
+		  var card = ui.draggable.data('card')
+		  wall.moveCard(card, status);
+		  refresh();
+	      }
+	  });
       });
     };
 
