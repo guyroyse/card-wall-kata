@@ -7,11 +7,9 @@ jQuery(function($) {
     */
 
     var sumCardsByStatus = function(status) {
-	var sumComplexity = 0;
-	_.each(status.cards,function(card) {
-	    sumComplexity += card.complexity;
-	});
-	return sumComplexity;
+	return _(status.cards).reduce(function(memo, card) {
+	    return memo + b.complexity;
+	}, 0);
     };
 
     var refresh = function() {
