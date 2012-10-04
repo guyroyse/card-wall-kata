@@ -6,7 +6,7 @@ var createWall = function() {
   }
 
   var wall = {
-
+      cards: cards,
     addCard: function(card, statusIndex) {
       statusIndex = statusIndex || 0;
       var status = cards[statusIndex];
