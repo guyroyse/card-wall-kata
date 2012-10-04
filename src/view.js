@@ -6,12 +6,20 @@ jQuery(function($) {
       wall.addCard(createCard("our second card", "our second card", 2));
     */
 
+    var sumCardsByStatus = function(status) {
+	var sumComplexity = 0;
+	_.each(status.cards,function(card) {
+	    sumComplexity += card.complexity;
+	});
+	return sumComplexity;
+    };
+
     var refresh = function() {
       var outer = $('.outer');
       outer.empty();
       _(wall.cards).each(function(status) {
         var between = $('<div class="bordered"/>').appendTo(outer);
-        between.text("status: " + (status.name || "I HAVE NO NAME"));
+          between.text("status: " + (status.name || "I HAVE NO NAME") + " sum " + sumCardsByStatus(status));
         _(status.cards).each(function(card) {
           var template = _.template($('#cardTemplate').html());
           var statuses = _(_(wall.cards).without(status)).pluck('name');
@@ -57,5 +65,4 @@ jQuery(function($) {
       wall.addStatus(name);
       refresh();
     });
-
 });
